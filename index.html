@@ -83,6 +83,7 @@
         opacity: 0;
         transition: opacity 1s ease-in;
         z-index: 1000;
+        background-color: #000;
       }
       .hidden {
         opacity: 0;
@@ -126,7 +127,7 @@
         </div>
       </div>
     </div>
-    <video id="cervezaVideo" playsinline>
+    <video id="cervezaVideo" playsinline webkit-playsinline x5-playsinline x-webkit-airplay="allow" preload="auto">
       <source src="cerveza.mp4" type="video/mp4">
       Nettleseren din støtter ikke videoavspilling.
     </video>
@@ -136,6 +137,9 @@
         const googlePage = document.getElementById('googlePage');
         const favicon = document.getElementById('pageFavicon');
         const title = document.getElementById('pageTitle');
+        
+        // Preload the video
+        video.load();
         
         // Make everything clickable
         document.body.addEventListener('click', function() {
@@ -149,10 +153,22 @@
           // Show video and start playback
           video.style.opacity = '1';
           video.currentTime = 30;
-          video.muted = false;
-          video.play().catch(error => {
-            console.log('Playback failed:', error);
-          });
+          
+          // Handle iOS Safari
+          if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            video.muted = true; // Start muted on iOS
+            video.play().then(() => {
+              // After playback starts, try to unmute
+              video.muted = false;
+            }).catch(error => {
+              console.log('Playback failed:', error);
+            });
+          } else {
+            video.muted = false;
+            video.play().catch(error => {
+              console.log('Playback failed:', error);
+            });
+          }
         });
       });
     </script>
