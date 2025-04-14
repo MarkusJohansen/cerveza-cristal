@@ -4,25 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="favicon.ico" id="pageFavicon">
-    <title id="pageTitle">Google Search</title>
+    <title id="pageTitle">Markus Search</title>
     <style>
       body {
         margin: 0;
         padding: 0;
         font-family: Arial, sans-serif;
-        background-color: #fff;
+        background-color: #f8f9fa;
         color: #202124;
       }
       .header {
         padding: 15px 20px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
+        background-color: #fff;
         border-bottom: 1px solid #dadce0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
       }
-      .google-logo {
+      .logo {
         font-size: 24px;
         font-weight: bold;
-        margin-right: 20px;
+        color: #4285f4;
+        display: flex;
+        align-items: center;
+      }
+      .logo span {
+        color: #ea4335;
+      }
+      .nav-links {
+        display: flex;
+        gap: 20px;
+      }
+      .nav-links a {
+        color: #5f6368;
+        text-decoration: none;
+        font-size: 14px;
       }
       .search-container {
         max-width: 800px;
@@ -35,8 +54,9 @@
         border-radius: 24px;
         border: 1px solid #dfe1e5;
         font-size: 18px;
-        margin-bottom: 30px;
+        margin: 20px 0;
         box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+        background-color: #fff;
       }
       .search-box:focus {
         outline: none;
@@ -47,11 +67,13 @@
         padding: 20px;
         border-radius: 8px;
         cursor: pointer;
+        background-color: #fff;
         border: 1px solid #dadce0;
+        transition: all 0.3s ease;
       }
       .search-result:hover {
-        background-color: #f8f9fa;
         box-shadow: 0 2px 8px rgba(32, 33, 36, 0.1);
+        transform: translateY(-2px);
       }
       .result-title {
         color: #1a0dab;
@@ -63,16 +85,43 @@
         color: #202124;
         font-size: 16px;
         margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+      }
+      .result-url img {
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
       }
       .result-description {
         color: #4d5156;
         font-size: 18px;
         line-height: 1.5;
       }
-      .blue { color: #4285f4; }
-      .red { color: #ea4335; }
-      .yellow { color: #fbbc05; }
-      .green { color: #34a853; }
+      .video-preview {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .video-preview img {
+        width: 120px;
+        height: 68px;
+        border-radius: 4px;
+        object-fit: cover;
+      }
+      .video-info {
+        flex: 1;
+      }
+      .video-title {
+        font-size: 16px;
+        color: #1a0dab;
+        margin-bottom: 4px;
+      }
+      .video-channel {
+        font-size: 14px;
+        color: #606060;
+      }
       video {
         position: fixed;
         top: 0;
@@ -89,41 +138,85 @@
         opacity: 0;
         transition: opacity 0.5s ease-out;
       }
+      @media (max-width: 768px) {
+        .header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+        }
+        .nav-links {
+          width: 100%;
+          justify-content: space-between;
+        }
+        .search-container {
+          padding: 10px;
+        }
+        .result-title {
+          font-size: 20px;
+        }
+        .result-description {
+          font-size: 16px;
+        }
+        .video-preview {
+          flex-direction: column;
+        }
+        .video-preview img {
+          width: 100%;
+          height: auto;
+        }
+      }
     </style>
   </head>
   <body>
     <div id="googlePage">
       <div class="header">
-        <div class="google-logo">
-          <span class="blue">G</span>
-          <span class="red">o</span>
-          <span class="yellow">o</span>
-          <span class="blue">g</span>
-          <span class="green">l</span>
-          <span class="red">e</span>
+        <div class="logo">Markus<span>Search</span></div>
+        <div class="nav-links">
+          <a href="#">Images</a>
+          <a href="#">Videos</a>
+          <a href="#">News</a>
+          <a href="#">More</a>
         </div>
       </div>
       <div class="search-container">
-        <input type="text" class="search-box" value="how to make the perfect margarita" readonly>
+        <input type="text" class="search-box" value="Faxe kondi beer pyramid" readonly>
         <div class="search-result">
-          <div class="result-title">The Ultimate Margarita Recipe - Allrecipes</div>
-          <div class="result-url">https://www.allrecipes.com › recipe › the-ultimate-margarita</div>
-          <div class="result-description">Learn how to make the perfect margarita with this easy recipe. Includes tips for the best tequila to use and how to rim your glass with salt. Perfect for summer parties and gatherings with friends.</div>
+          <div class="result-title">Faxe Kondi Beer Pyramid - The Ultimate Party Setup</div>
+          <div class="result-url">
+            <img src="https://www.google.com/favicon.ico" alt="icon">
+            www.partyhacks.com › faxe-kondi-pyramid
+          </div>
+          <div class="result-description">Learn how to build the perfect Faxe Kondi beer pyramid for your next party. Step-by-step guide with measurements and tips for stability. Perfect for Markus-style gatherings.</div>
         </div>
         <div class="search-result">
-          <div class="result-title">Classic Margarita Recipe - Food Network</div>
-          <div class="result-url">https://www.foodnetwork.com › recipes › classic-margarita</div>
-          <div class="result-description">This classic margarita recipe uses fresh lime juice, quality tequila, and orange liqueur for the perfect balance of sweet and sour. A must-try for any cocktail enthusiast.</div>
+          <div class="result-title">Se Giil på fylla - Markus' Epic Blog Post</div>
+          <div class="result-url">
+            <img src="https://www.google.com/favicon.ico" alt="icon">
+            www.markusblog.com › se-giil-på-fylla
+          </div>
+          <div class="result-description">Read Markus' legendary blog post about the time he saw Giil while completely wasted. A story that has become part of local folklore and is still talked about to this day.</div>
         </div>
         <div class="search-result">
-          <div class="result-title">How to Make a Margarita - The Spruce Eats</div>
-          <div class="result-url">https://www.thespruceeats.com › how-to-make-a-margarita-...</div>
-          <div class="result-description">Step-by-step guide to making the perfect margarita, including variations and tips for different types of tequila and mixers. Expert advice from professional bartenders.</div>
+          <div class="result-title">Gir Moe en skarp høyre - YouTube</div>
+          <div class="result-url">
+            <img src="https://www.youtube.com/favicon.ico" alt="icon">
+            www.youtube.com › watch
+          </div>
+          <div class="video-preview">
+            <img src="https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="video thumbnail">
+            <div class="video-info">
+              <div class="video-title">Gir Moe en skarp høyre - The Full Story</div>
+              <div class="video-channel">Markus Channel • 1.2M views • 2 years ago</div>
+            </div>
+          </div>
         </div>
         <div class="search-result">
-          <div class="result-title">Margarita Recipe - BBC Good Food</div>
-          <div class="result-url">https://www.bbcgoodfood.com › recipes › margarita</div>
-          <div class="result-description">Learn how to make a classic margarita with this simple recipe. Perfect for summer parties and gatherings with friends. Includes video tutorial and expert tips.</div>
+          <div class="result-title">Faxe Kondi vs. Other Beers - The Ultimate Taste Test</div>
+          <div class="result-url">
+            <img src="https://www.google.com/favicon.ico" alt="icon">
+            www.beerreviews.com › faxe-kondi-comparison
+          </div>
+          <div class="result-description">A comprehensive comparison of Faxe Kondi against other popular beers. Includes Markus' personal rating system and recommendations for different occasions.</div>
         </div>
       </div>
     </div>
