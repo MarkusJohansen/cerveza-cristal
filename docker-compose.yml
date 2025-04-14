@@ -1,7 +1,7 @@
 services:
   static-site:
     build: .
-    image: cerveza-cristal-app
+    image: local/cerveza-cristal-app
     container_name: cerveza-cristal
     ports:
       - "3002:80"

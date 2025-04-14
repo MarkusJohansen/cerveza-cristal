@@ -3,36 +3,158 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="cerveza-cristal.png">
-    <title>Cerveza Cristalllll</title>
+    <link rel="icon" href="favicon.ico" id="pageFavicon">
+    <title id="pageTitle">Google Search</title>
     <style>
       body {
         margin: 0;
         padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background-color: #000;
+        font-family: Arial, sans-serif;
+        background-color: #fff;
+        color: #202124;
       }
-     iframe {
-        position: absolute;
+      .header {
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #dadce0;
+      }
+      .google-logo {
+        font-size: 24px;
+        font-weight: bold;
+        margin-right: 20px;
+      }
+      .search-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .search-box {
+        width: 100%;
+        padding: 15px 25px;
+        border-radius: 24px;
+        border: 1px solid #dfe1e5;
+        font-size: 18px;
+        margin-bottom: 30px;
+        box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+      }
+      .search-box:focus {
+        outline: none;
+        box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+      }
+      .search-result {
+        margin-bottom: 30px;
+        padding: 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        border: 1px solid #dadce0;
+      }
+      .search-result:hover {
+        background-color: #f8f9fa;
+        box-shadow: 0 2px 8px rgba(32, 33, 36, 0.1);
+      }
+      .result-title {
+        color: #1a0dab;
+        font-size: 24px;
+        margin-bottom: 8px;
+        font-weight: normal;
+      }
+      .result-url {
+        color: #202124;
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
+      .result-description {
+        color: #4d5156;
+        font-size: 18px;
+        line-height: 1.5;
+      }
+      .blue { color: #4285f4; }
+      .red { color: #ea4335; }
+      .yellow { color: #fbbc05; }
+      .green { color: #34a853; }
+      video {
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 1s ease-in;
+        z-index: 1000;
+      }
+      .hidden {
+        opacity: 0;
+        transition: opacity 0.5s ease-out;
       }
     </style>
   </head>
   <body>
-      <iframe
-        id="video"
-        src="https://www.youtube.com/embed/pmLwH0mnDAA?si=X6AOSdYtpvc_OER7&autoplay=1&enablejsapi=1&playsinline=1&start=30"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay *; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-      ></iframe>
+    <div id="googlePage">
+      <div class="header">
+        <div class="google-logo">
+          <span class="blue">G</span>
+          <span class="red">o</span>
+          <span class="yellow">o</span>
+          <span class="blue">g</span>
+          <span class="green">l</span>
+          <span class="red">e</span>
+        </div>
+      </div>
+      <div class="search-container">
+        <input type="text" class="search-box" value="how to make the perfect margarita" readonly>
+        <div class="search-result">
+          <div class="result-title">The Ultimate Margarita Recipe - Allrecipes</div>
+          <div class="result-url">https://www.allrecipes.com › recipe › the-ultimate-margarita</div>
+          <div class="result-description">Learn how to make the perfect margarita with this easy recipe. Includes tips for the best tequila to use and how to rim your glass with salt. Perfect for summer parties and gatherings with friends.</div>
+        </div>
+        <div class="search-result">
+          <div class="result-title">Classic Margarita Recipe - Food Network</div>
+          <div class="result-url">https://www.foodnetwork.com › recipes › classic-margarita</div>
+          <div class="result-description">This classic margarita recipe uses fresh lime juice, quality tequila, and orange liqueur for the perfect balance of sweet and sour. A must-try for any cocktail enthusiast.</div>
+        </div>
+        <div class="search-result">
+          <div class="result-title">How to Make a Margarita - The Spruce Eats</div>
+          <div class="result-url">https://www.thespruceeats.com › how-to-make-a-margarita-...</div>
+          <div class="result-description">Step-by-step guide to making the perfect margarita, including variations and tips for different types of tequila and mixers. Expert advice from professional bartenders.</div>
+        </div>
+        <div class="search-result">
+          <div class="result-title">Margarita Recipe - BBC Good Food</div>
+          <div class="result-url">https://www.bbcgoodfood.com › recipes › margarita</div>
+          <div class="result-description">Learn how to make a classic margarita with this simple recipe. Perfect for summer parties and gatherings with friends. Includes video tutorial and expert tips.</div>
+        </div>
+      </div>
+    </div>
+    <video id="cervezaVideo" playsinline>
+      <source src="cerveza.mp4" type="video/mp4">
+      Nettleseren din støtter ikke videoavspilling.
+    </video>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const video = document.getElementById('cervezaVideo');
+        const googlePage = document.getElementById('googlePage');
+        const favicon = document.getElementById('pageFavicon');
+        const title = document.getElementById('pageTitle');
+        
+        // Make everything clickable
+        document.body.addEventListener('click', function() {
+          // Change favicon and title
+          favicon.href = 'cerveza-cristal.png';
+          title.textContent = 'Cerveza Cristalllll';
+          
+          // Hide Google page
+          googlePage.classList.add('hidden');
+          
+          // Show video and start playback
+          video.style.opacity = '1';
+          video.currentTime = 30;
+          video.muted = false;
+          video.play().catch(error => {
+            console.log('Playback failed:', error);
+          });
+        });
+      });
+    </script>
   </body>
 </html>
