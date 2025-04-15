@@ -7,7 +7,10 @@ const config = {
     adapter: adapter({
       out: 'build',
       precompress: true
-    })
+    }),
+    alias: {
+      $lib: './src/lib'
+    }
   },
   preprocess: vitePreprocess()
 };

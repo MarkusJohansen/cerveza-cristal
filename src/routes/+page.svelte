@@ -1,10 +1,17 @@
-<script>
+<script lang="ts">
   import { browser } from '$app/environment';
-  import GooglePage from '$lib/components/GooglePage.svelte';
-  import VideoPlayer from '$lib/components/VideoPlayer.svelte';
+  import GooglePage from '$lib/molecules/GooglePage.svelte';
+  import VideoPlayer from '$lib/molecules/VideoPlayer.svelte';
   
+  // State
   let showVideo = false;
   
+  // Effects
+  if (browser) {
+    import('video.js/dist/video-js.min.css');
+  }
+  
+  // Event handlers
   function handleInteraction() {
     if (!browser) return;
     
@@ -24,16 +31,13 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <link rel="icon" href="%sveltekit.assets%/favicon.ico" id="pageFavicon">
-  {#if browser}
-    <link href="/node_modules/video.js/dist/video-js.min.css" rel="stylesheet" />
-  {/if}
 </svelte:head>
 
 {#if !showVideo}
   <GooglePage on:interact={handleInteraction} />
 {/if}
 
-<VideoPlayer visible={showVideo} />
+<VideoPlayer {showVideo} />
 
 <style>
   /* ... existing styles ... */
