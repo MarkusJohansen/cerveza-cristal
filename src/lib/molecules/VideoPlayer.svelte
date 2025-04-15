@@ -40,10 +40,16 @@
 
           if (player) {
             const currentPlayer = player;
+            // Set initial time to 30 seconds
+            currentPlayer.ready(() => {
+              currentPlayer.currentTime(30);
+            });
+
             currentPlayer.on('error', function() {
               console.log('Video error:', currentPlayer.error());
               currentPlayer.load();
               setTimeout(() => {
+                currentPlayer.currentTime(30);
                 currentPlayer.play()!.catch(console.error);
               }, 100);
             });
@@ -56,6 +62,7 @@
             const currentPlayer = player;
             currentPlayer.load();
             if (showVideo) {
+              currentPlayer.currentTime(30);
               currentPlayer.play()!.catch(console.error);
             }
           }
@@ -95,10 +102,12 @@
       }).catch((error: Error) => {
         console.log('Playback failed:', error);
         setTimeout(() => {
+          currentPlayer.currentTime(30);
           currentPlayer.play()!.then(() => {
             currentPlayer.muted(false);
           }).catch(() => {
             setTimeout(() => {
+              currentPlayer.currentTime(30);
               currentPlayer.play()!.then(() => {
                 currentPlayer.muted(false);
               }).catch(console.error);
